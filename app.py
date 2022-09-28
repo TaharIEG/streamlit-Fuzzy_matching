@@ -30,9 +30,9 @@ st.subheader('Inserez un ficher excel qui respecte la norme convenu')
 #st.markdown("<h1 style='text-align: center; color: red;'>Inserez un ficher excel qui respecte la norme convenu</h1>", unsafe_allow_html=True)
 st.markdown("""
 * Feuille 1 
-  * Veuillez mettre la liste des elements à matcher dans la premiere colonne de la premiere feuille et mettez le titre ou laisser la premiere cellule vide
+  * Veuillez mettre la liste des éléments à matcher dans la première colonne de la première feuille et mettez le titre ou laisser la première cellule vide
 * Feuille 2
-  * Veuillez mettre la liste source dans la premiere colonne de la deuxieme feuille et mettez le titre ou laisser la premiere cellule vide""")
+  * Veuillez mettre la liste source dans la première colonne de la deuxième feuille et mettez le titre ou laisser la première cellule vide""")
 
 
 uploaded_file = st.file_uploader("Choose an excel file",type=['xlsx','xls'], accept_multiple_files=False,label_visibility="hidden")
@@ -109,7 +109,7 @@ if uploaded_file is not None:
     st.dataframe(df1)
     df_xlsx = to_excel(df1)
 
-    st.download_button(label='📥 Download Current Result',
+    st.download_button(label='📥 Télécharger le résultat',
                                 data=df_xlsx ,
                                 file_name= 'resultats_matching.xlsx')
 
