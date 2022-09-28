@@ -42,72 +42,72 @@ uploaded_file = st.file_uploader("Choose an excel file",type=['xlsx','xls'], acc
 if uploaded_file is not None:
     
 
-
-    df1 = pd.read_excel(uploaded_file,sheet_name=0)
-    df2 = pd.read_excel(uploaded_file,sheet_name=1)
-
-
-
-
-    df1['col_trait']= df1[df1.columns[0]]
-    df2['col_trait'] = df2[df2.columns[0]]
-
-    df1 = df1.replace({np.nan:None})
-    df2 = df2.replace({np.nan:None})
-
-
-
-    df1['col_trait'] = df1['col_trait'].apply(lambda x : x.lower() if x else None)
-    df1['col_trait'] = df1['col_trait'].apply(lambda x :unidecode.unidecode(x) if x else None)
-    df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace(".","") if x else None)
-    df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace(",","") if x else None)
-    df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace(" ","") if x else None)
-    df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace("'","") if x else None)
-    df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace('"',"") if x else None)
-    df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace('ep',"") if x else None)
-    df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace('epouse',"") if x else None)
-    df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace('epous',"") if x else None)
+    with st.spinner("Veuillez attendre s'il vous plaît..."):
+        df1 = pd.read_excel(uploaded_file,sheet_name=0)
+        df2 = pd.read_excel(uploaded_file,sheet_name=1)
 
 
 
 
+        df1['col_trait']= df1[df1.columns[0]]
+        df2['col_trait'] = df2[df2.columns[0]]
 
-    df2['col_trait'] = df2['col_trait'].apply(lambda x : x.lower() if x else None)
-    df2['col_trait'] = df2['col_trait'].apply(lambda x :unidecode.unidecode(x) if x else None)
-    df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace(".","") if x else None)
-    df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace(",","") if x else None)
-    df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace(" ","") if x else None)
-    df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace("'","") if x else None)
-    df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace('"',"") if x else None)
-    df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace('epous',"") if x else None)
-    df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace('ep',"") if x else None)
-    df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace('epouse',"") if x else None)
+        df1 = df1.replace({np.nan:None})
+        df2 = df2.replace({np.nan:None})
 
 
-    df2 = df2.drop_duplicates(subset=['col_trait'],keep='first')
 
-    dic_df2 = {}
-    for y,x in zip(df2[df2.columns[0]],df2['col_trait']):
-        dic_df2[x]=y
+        df1['col_trait'] = df1['col_trait'].apply(lambda x : x.lower() if x else None)
+        df1['col_trait'] = df1['col_trait'].apply(lambda x :unidecode.unidecode(x) if x else None)
+        df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace(".","") if x else None)
+        df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace(",","") if x else None)
+        df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace(" ","") if x else None)
+        df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace("'","") if x else None)
+        df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace('"',"") if x else None)
+        df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace('ep',"") if x else None)
+        df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace('epouse',"") if x else None)
+        df1['col_trait'] = df1['col_trait'].apply(lambda x :x.replace('epous',"") if x else None)
 
-    L = []
-    choices = list(dic_df2.keys())
-
-    for x in df1['col_trait']:
-
-        L.append(process.extract(x, choices, limit=2))
 
 
-    df1["Choix 1"] = [dic_df2[x[0][0]] for x in L]
-    df1['Score choix 1'] = [x[0][1] for x in L]
 
-    df1["Choix 2"] = [dic_df2[x[1][0]] for x in L]
-    df1['Score choix 2'] = [x[1][1] for x in L]
 
-    df1 = df1.drop(columns={"col_trait"})
+        df2['col_trait'] = df2['col_trait'].apply(lambda x : x.lower() if x else None)
+        df2['col_trait'] = df2['col_trait'].apply(lambda x :unidecode.unidecode(x) if x else None)
+        df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace(".","") if x else None)
+        df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace(",","") if x else None)
+        df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace(" ","") if x else None)
+        df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace("'","") if x else None)
+        df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace('"',"") if x else None)
+        df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace('epous',"") if x else None)
+        df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace('ep',"") if x else None)
+        df2['col_trait'] = df2['col_trait'].apply(lambda x :x.replace('epouse',"") if x else None)
 
-    st.dataframe(df1)
-    df_xlsx = to_excel(df1)
+
+        df2 = df2.drop_duplicates(subset=['col_trait'],keep='first')
+
+        dic_df2 = {}
+        for y,x in zip(df2[df2.columns[0]],df2['col_trait']):
+            dic_df2[x]=y
+
+        L = []
+        choices = list(dic_df2.keys())
+
+        for x in df1['col_trait']:
+
+            L.append(process.extract(x, choices, limit=2))
+
+
+        df1["Choix 1"] = [dic_df2[x[0][0]] for x in L]
+        df1['Score choix 1'] = [x[0][1] for x in L]
+
+        df1["Choix 2"] = [dic_df2[x[1][0]] for x in L]
+        df1['Score choix 2'] = [x[1][1] for x in L]
+
+        df1 = df1.drop(columns={"col_trait"})
+
+        st.dataframe(df1)
+        df_xlsx = to_excel(df1)
 
     st.download_button(label='📥 Télécharger le résultat',
                                 data=df_xlsx ,
