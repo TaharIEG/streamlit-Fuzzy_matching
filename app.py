@@ -105,6 +105,9 @@ if uploaded_file is not None:
         df1['Score choix 2'] = [x[1][1] for x in L]
 
         df1 = df1.drop(columns={"col_trait"})
+        
+        if len(df2.columns != 1):
+            df1 = df1.merge(df2, how='left',left_on="Choix 1", right_on=df2.columns[0])
 
         st.dataframe(df1)
         df_xlsx = to_excel(df1)
