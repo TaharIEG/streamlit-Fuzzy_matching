@@ -7,6 +7,7 @@ import numpy as np
 from io import BytesIO
 from pyxlsb import open_workbook as open_xlsb
 import streamlit as st
+from stqdm import stqdm
 from PIL import Image
 
 
@@ -93,7 +94,7 @@ if uploaded_file is not None:
         L = []
         choices = list(dic_df2.keys())
 
-        for x in df1['col_trait']:
+        for x in stqdm(df1['col_trait']):
 
             L.append(process.extract(x, choices, limit=2))
 
